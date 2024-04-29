@@ -55,7 +55,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowSpecificOrigin"); // Применяйте CORS политику здесь
+app.UseCors("AllowSpecificOrigin"); 
 
 app.UseAuthentication();
 app.UseAuthorization();
