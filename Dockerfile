@@ -10,17 +10,17 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Logging.csproj", "."]
-RUN dotnet restore "./Logging.csproj"
+COPY ["Min_API_DZ.csproj", "."]
+RUN dotnet restore "./Min_API_DZ.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "./Logging.csproj" -c %BUILD_CONFIGURATION% -o /app/build
+RUN dotnet build "./Min_API_DZ.csproj" -c %BUILD_CONFIGURATION% -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Logging.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Min_API_DZ.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Logging.dll"]
+ENTRYPOINT ["dotnet", "Min_API_DZ.dll"]
